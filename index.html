@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Create TS with VLC</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+
+$(document).ready(() => {
+	$('input#start_stream').on('click', event => {
+		$.ajax("/ts/vlc/", {
+			type: "POST",
+			contentType: "application/json",
+			data: JSON.stringify({"title": $("input[name=new_item_name]").val()}),
+			dataType: "json",
+			processData: false,
+			success: (data, status) => console.log('success of start'),
+			error: (error) => console.log('error of start')
+		});
+	});
+
+	$('input#stop_stream').on('click', event => {
+		$.ajax("/ts/vlc", {
+			type: "DELETE",
+			contentType: "application/json",
+			data: JSON.stringify({"title": $("input[name=new_item_name]").val()}),
+			dataType: "json",
+			processData: false,
+			success: (data, status) => console.log('success of stop'),
+			error: (error) => console.log('error of stop')
+		});
+	});
+});
+
+	</script>
+
+</head>
+
+<body>
+
+<div>
+	<input id="start_stream" type="Submit" value="Start"/>
+	<input id="stop_stream" type="Submit" value="Stop"/>
+</div>
+
+<div class="events_box">
+
+</div>
+
+</body>
+
+</html>
