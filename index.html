@@ -31,6 +31,12 @@ $(document).ready(() => {
 	});
 });
 
+var source = new EventSource('/ts/vlc/status');
+source.onmessage = (event) => {
+	$('#events_box').append(event.data);
+}
+source.onerror = () => source.close();
+
 	</script>
 
 </head>
@@ -42,7 +48,7 @@ $(document).ready(() => {
 	<input id="stop_stream" type="Submit" value="Stop"/>
 </div>
 
-<div class="events_box">
+<div id="events_box">
 
 </div>
 
